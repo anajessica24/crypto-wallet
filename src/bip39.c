@@ -71,3 +71,16 @@ void load_wordlist(const char *filename, char words[2048][MAX_WORD_LENGTH])
     fclose(fp);
 
 }
+
+//Generate random entropy using /dev/urandom
+void generate_entropy(uint8_t *entropy, uint8_t len)
+{
+    FILE *fp = fopen("/dev/urandom", "rb");
+    if (fp == NULL)
+    {
+        perror("fopen");
+        fclose(fp);
+        exit(1);
+    }
+    
+}
