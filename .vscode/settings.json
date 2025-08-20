@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "bip39.h": "c",
+        "sha256.h": "c",
+        "stdint.h": "c",
+        "stdlib.h": "c"
+    }
+}

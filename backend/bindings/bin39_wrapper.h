@@ -1,0 +1,1 @@
+//Código C adaptado para Python (via ctypes ou cffi)
