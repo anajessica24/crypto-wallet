@@ -49,9 +49,11 @@ int main(int argc, char *argv[])
     load_wordlist(filename, wordlist);
 
     // Generate entropy
-    
+    uint8_t entropy[entropy_bytes(entropy_bits)];
+    generate_entropy(entropy, entropy_bytes(entropy_bits));
 
     // Convert entropy to mnemonic phrase
+    entropy_to_mnemonic(entropy, entropy_bits, wordlist);
 
 
     return 0;

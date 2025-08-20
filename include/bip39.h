@@ -33,4 +33,10 @@ void load_wordlist(const char *filename, char words[2048][MAX_WORD_LENGTH]);
 // Generate random entropy
 void generate_entropy(uint8_t *entropy, uint8_t len);
 
+// Get specific bit from byte array
+int get_bit(uint8_t *data, int bit);
+
+//Convert entropy into mnemonic pharse
+void entropy_to_mnemonic(uint8_t *entropy, uint16_t entropy_bits, char wordlist[2048][MAX_WORD_LENGTH]);
+
 #endif
