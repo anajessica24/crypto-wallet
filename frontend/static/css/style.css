@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #e8e8ea;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative; 
+}
+
+.content-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    position: relative; /* Adicionado para conter elementos absolutos */
+}
+
+.whitebg {
+    position: absolute; 
+    top: 328px;
+    width: 95vw; /* Aumentado de 80vw para 95vw */
+    height: 6.5rem;
+    left: 50%; /* Adicionado para centralizar */
+    transform: translateX(-50%); /* Adicionado para centralizar */
+}
+
+.cat-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+}
+
+.cat {
+    top: 150px;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+}
+
+.subtitle {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.input-copy {
+    display: flex;
+    align-items: center;
+    width: 95vw; 
+    max-width: 1100px;
+    height: 50px; 
+    padding: 0 10px;
+    box-sizing: border-box;
+    gap: 10px;
+    position: absolute;
+    top: 355px;
+    left: 50%;
+    transform: translateX(-50%); 
+}
+
+.input-box {
+    flex: 1;
+    height: 100%; /* Preenche a altura do container */
+    background: #e8e8ea;
+    border-radius: 25px;
+    padding: 0 15px;
+    box-sizing: border-box; /* Garante que padding não afete a largura */
+    text-align: center;
+}
+
+.copy-btn {
+    background: #fbb63a;
+    border: none;
+    border-radius: 50%;
+    padding: 1rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 50px; /* Tamanho fixo para consistência */
+    height: 50px; /* Tamanho fixo para consistência */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 48vh;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Limita a largura máxima */
+}
+
+.toggle {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle input {
+    display: none;
+}
+
+.slider {
+    width: 40px;
+    height: 20px;
+    background: #2c3043;
+    border-radius: 10px;
+    display: inline-block;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.toggle input:checked + .slider::before {
+    transform: translateX(20px);
+}
+
+.main-btn {
+    margin-top: 30px;
+    padding: 15px 30px;
+    background: #fbb63a;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    max-width: 100%;
+    width: 80%; /* Largura responsiva */
+}
+
+footer {
+    background: #2c3043;
+    color: white;
+    align-content: center;
+    justify-items: center;
+    height: 8vh;
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .whitebg, .input-copy {
+        width: 98vw; /* Aumenta a largura em telas menores */
+        max-width: none; /* Remove o limite máximo */
+    }
+    
+    .input-copy {
+        height: 45px; /* Reduz a altura em telas menores */
+    }
+    
+    .copy-btn {
+        width: 45px; /* Reduz o tamanho do botão */
+        height: 45px;
+        padding: 0.8rem;
+    }
+    
+    .content-container {
+        padding-top: 50vh; /* Ajusta o posicionamento */
+    }
+}
+
+@media (max-width: 480px) {
+    .whitebg, .input-copy {
+        width: 99vw; /* Largura quase total em telas muito pequenas */
+    }
+    
+    .input-copy {
+        height: 40px; /* Altura ainda menor */
+        padding: 0 5px; /* Reduz o padding */
+    }
+    
+    .copy-btn {
+        width: 40px;
+        height: 40px;
+        padding: 0.6rem;
+    }
+    
+    .content-container {
+        padding-top: 55vh; /* Ajuste adicional para telas pequenas */
+    }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, inicial-scale=1.0">
+    <title>CatWallet</title>
+    <script src="../js/script.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+</head>
+
+<body>
+    <div class="container">
+        <div class="cat-wrapper">
+            <img src="../static/img/cat.png" alt="gato" class="cat">
+            <div class="content-stack">
+                <img src="../static/img/elementobranco.png" alt="White Background" class="whitebg">
+                <!-- Result meneumonic -->
+                <div class="input-copy">
+                    <span class="input-box"></span>
+                    <button class="copy-btn">
+                    <i class="bi bi-copy"></i>
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="content-container">
+        <!-- Language and Words -->
+        <p class="subtitle">Select the number of words and language:</p>
+        <div class="toggle">
+            <span class="lang">English</span>
+            <label>
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+            <span class="lang">Portuguese</span>
+        </div>
+
+        <!-- Nº words -->
+        <div class="toggle">
+            <span class="nwords">12 words</span>
+            <label>
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+            <span class="nwords">24 words</span>
+        </div>
+
+        <!-- Generate meneumonic -->
+        <button class="main-btn">Generate meneumonic</button>
+
+    </div>
+
+
+    <footer>
+        <p></p>
+    </footer>
+</body>
+
+</html>
