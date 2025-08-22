@@ -107,7 +107,7 @@ int get_bit(uint8_t *data, int bit)
 void entropy_to_mnemonic(uint8_t *entropy, uint16_t entropy_bits, char wordlist[2048][MAX_WORD_LENGTH])
 {
     // Debug message
-    printf("Creating %d Mnemonics words\n", total_words(entropy_bits));
+    // printf("Creating %d Mnemonics words\n", total_words(entropy_bits));
 
     uint8_t hash[32];
     const int len = entropy_bytes(entropy_bits);

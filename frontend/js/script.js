@@ -4,15 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const wordsToggle = document.querySelector('.toggle:nth-child(3) input[type="checkbox"]');
     const generateBtn = document.querySelector('.main-btn');
     const inputBox = document.querySelector('.input-box');
-    
-    //  Generate lang and words values
+   
+    // Generate lang and words values
     const generateValues = () => {
-        const langValue = langToggle.checked ? '-br' : '-en';
+        const langValue = langToggle.checked ? 'br' : 'en';
         const wordsValue = wordsToggle.checked ? '256' : '128';
-        
+       
         return { lang: langValue, words: wordsValue };
     };
-    
+   
     // Function to generate random number based on mouse movements
     const randomScratch = (callback) => {
         // Create UI elements for entropy collection
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="progress"></div>
             </div>
         `;
-        
+       
         // Add styles for the container
         const style = document.createElement('style');
         style.textContent = `
@@ -54,28 +54,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         `;
         document.head.appendChild(style);
-        
+       
         // Insert container after the button
         generateBtn.parentNode.insertBefore(scratchContainer, generateBtn.nextSibling);
-        
+       
         const progressBar = scratchContainer.querySelector('.progress');
         const instruction = scratchContainer.querySelector('.scratch-instruction');
-        
-        let entropy = 0;
+       
+        let entropyData = [];
         let moves = 0;
         const maxMoves = 100;
         let timeoutId;
-        
+       
         // Function to handle mouse movements
         const handleMouseMove = (e) => {
             // Add entropy based on mouse position and time
-            entropy += e.clientX + e.clientY + Date.now();
+            const dataPoint = {
+                x: e.clientX,
+                y: e.clientY,
+                time: Date.now()
+            };
+            entropyData.push(dataPoint);
             moves++;
-            
+           
             // Update progress bar
             const progress = Math.min(100, (moves / maxMoves) * 100);
             progressBar.style.width = `${progress}%`;
-            
+           
             // Update instruction text
             if (moves < maxMoves / 3) {
                 instruction.textContent = "Keep moving your mouse randomly...";
@@ -84,91 +89,66 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 instruction.textContent = "Finalizing generation...";
             }
-            
+           
             // Check if we have enough entropy
             if (moves >= maxMoves) {
                 finishEntropyCollection();
             }
         };
-        
+       
         // Function to finish entropy collection
         const finishEntropyCollection = () => {
             // Remove event listeners
             document.removeEventListener('mousemove', handleMouseMove);
             clearTimeout(timeoutId);
-            
+           
             // Remove the container
             scratchContainer.remove();
-            
-            // Generate random number based on collected entropy
-            const randomNumber = entropy % 1000000 / 1000000; //  Normalize to 0-1
-            
-            // Call callback with random number
-            callback(randomNumber);
+           
+            // Convert entropy data to string
+            const entropyString = JSON.stringify(entropyData);
+           
+            // Call callback with r entropy data
+            callback(entropyString);
         };
-        
+       
         // Set timeout if user doesn't move mouse enough
         timeoutId = setTimeout(() => {
-            instruction.textContent = "Movimentos insuficientes. Tentando gerar assim mesmo... / Not enough mouse movement. Trying to generate anyway...";
+            instruction.textContent = "Not enough mouse movement. Trying to generate anyway...";
             setTimeout(finishEntropyCollection, 1000);
         }, 10000); // 10 seconds timeout
-        
+       
         // Start listening to mouse movements
         document.addEventListener('mousemove', handleMouseMove);
     };
-    
+   
     // Add click event to button
     generateBtn.addEventListener('click', () => {
         // Disable button during generation
         generateBtn.disabled = true;
         generateBtn.textContent = " Generating...";
-        
+       
         // Get configuration values
         const config = generateValues();
-        
-        // Start entropy collection
-        randomScratch((randomNumber) => {
-            // Generate mnemonic based on random number and configuration
-            const mnemonic = generateMnemonic(randomNumber, config);
-            
-            // Display the mnemonic in the input box
-            inputBox.textContent = mnemonic;
-            
-            // Re-enable the button
-            generateBtn.disabled = false;
-            generateBtn.textContent = "Generate Mnemonic";
-        });
+        console.log(config)
+        let customEntropy;
+
+        randomScratch((randomNumber) => { 
+            // Aqui você recebe o valor final
+            customEntropy = randomNumber;
+            console.log("Dentro do callback:", customEntropy);
+            // Exemplo: enviar para o backend
+            fetch(`http://localhost:5001/generate?lan=${config.lang}&words=${config.words}&entropy=${encodeURIComponent(customEntropy[0])}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Resultado do backend:", data);
+                    generateBtn.disabled = false;
+                    generateBtn.textContent = "Generate";
+                });
+
+
+            });
+
     });
-    
-    // Function to generate mnemonic (simplified example)
-    const generateMnemonic = (randomNumber, config) => {
-        // Este é apenas um placeholder para demonstração / This is just a placeholder for demonstration
-        
-        // Listas de palavras de exemplo (em um app real, seriam as listas BIP39 completas) / Example wordlists (in a real app, these would be complete BIP39 wordlists)
-        const enWordlist = ["abandon", "ability", "able", "about", "above", "absent", "absorb", "abstract", "absurd", "abuse"];
-        const ptWordlist = ["abacate", "abaixar", "abalar", "abandonar", "abastecer", "abater", "abdicar", "abeberar", "abdominal", "abdomen"];
-        
-        // Select wordlist based on language
-        const wordlist = config.lang === '-en' ? enWordlist : ptWordlist;
-        
-        //Determine number of words based on config
-        const wordCount = config.words === '128' ? 12 : 24;
-        
-        //enerate mnemonic words
-        let mnemonic = "";
-        for (let i = 0; i < wordCount; i++) {
-            // Use the random number to pick a word
-            const index = Math.floor(randomNumber * wordlist.length * 1000) % wordlist.length;
-            mnemonic += wordlist[index];
-            
-            if (i < wordCount - 1) {
-                mnemonic += " ";
-            }
-            
-            //  Modify the random number for the next word
-            randomNumber = (randomNumber * 9301 + 49297) % 233280;
-        }
-        
-        return mnemonic;
-    }
 });
+

@@ -1,1 +1,3 @@
 #dependências de Python
+
+Flask==2.0.1
