@@ -65,24 +65,31 @@ body {
     align-items: center;
     width: 95vw; 
     max-width: 1100px;
-    height: 50px; 
-    padding: 0 10px;
+    min-height: 50px; /* Altura mínima em vez de altura fixa */
+    padding: 10px; /* Adicione padding para espaço interno */
     box-sizing: border-box;
     gap: 10px;
     position: absolute;
     top: 355px;
-    margin: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white; /* Adicione fundo branco para melhor visualização */
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra para destaque */
 }
 
 .input-box {
     flex: 1;
-    height: 100%; /* Preenche a altura do container */
+    min-height: 30px; /* Altura mínima em vez de altura fixa */
     background: #e8e8ea;
-    border-radius: 25px;
-    padding: 0 15px;
-    box-sizing: border-box; /* Garante que padding não afete a largura */
+    border-radius: 15px; /* Borda arredondada menor que o container */
+    padding: 10px 15px;
+    box-sizing: border-box;
     text-align: center;
-     line-height: 50px;
+    line-height: 1.5; /* Melhor espaçamento entre linhas */
+    word-wrap: break-word; /* Permite quebra de palavras longas */
+    white-space: pre-wrap; /* Mantém quebras de linha e permite quebra automática */
+    overflow-wrap: break-word; /* Garante quebra de palavras muito longas */
 }
 
 .copy-btn {

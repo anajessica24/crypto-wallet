@@ -1,4 +1,6 @@
-# Project: Cat Wallet / crypto-wallet
+# Cat Wallet (crypto-wallet)
+#### Video Demo:  <https://www.youtube.com/watch?v=HCy602CcF1Q>
+#### Description:
 
 ## Overview
 Cat Wallet is a mnemonic phrase (seed phrase) generator based on the BIP39 standard, developed as a final course project. The main goal is to create a secure recovery phrase for cryptocurrency wallets by combining:
@@ -104,3 +106,11 @@ Cat Wallet is a robust, secure, and interactive project applying knowledge of:
 
 The project demonstrates the ability to combine concepts of security, cryptography, and user experience, achieving the goal of creating something useful, educational, and technically challenging.
 
+**Use of AI:**
+
+- Organization and structuring of the project  
+- Test implementation  
+- Error checking, review, and correction  
+- Support in refactoring complex code segments  
+- Translation and adaptation of code/comments into multiple languages  
+- Assistance in integrating different languages and frameworks  
