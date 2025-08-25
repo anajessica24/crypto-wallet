@@ -61,12 +61,12 @@ def serve_js(filename):
 
 # === Debug prints (úteis durante desenvolvimento) ==========================
 
-print(f"Template directory: {template_dir}")
-print(f"Static directory:   {static_dir}")
-print(f"JS directory:       {js_dir}")
-print(f"Index.html exists:  {os.path.exists(os.path.join(template_dir, 'index.html'))}")
-print(f"Style.css exists:   {os.path.exists(os.path.join(static_dir, 'css', 'style.css'))}")
-print(f"Script.js exists:   {os.path.exists(os.path.join(js_dir, 'script.js'))}")
+# print(f"Template directory: {template_dir}")
+# print(f"Static directory:   {static_dir}")
+# print(f"JS directory:       {js_dir}")
+# print(f"Index.html exists:  {os.path.exists(os.path.join(template_dir, 'index.html'))}")
+# print(f"Style.css exists:   {os.path.exists(os.path.join(static_dir, 'css', 'style.css'))}")
+# print(f"Script.js exists:   {os.path.exists(os.path.join(js_dir, 'script.js'))}")
 
 # === Routes =================================================================
 
@@ -81,6 +81,10 @@ def generate_mnemonic():
         lan = request.args.get('lan', 'en')
         words = request.args.get('words', '128')
         entropy_json = request.args.get('entropy', '[]')
+
+        
+        # print(f"[TESTE] Recebi entropy_json do JS:", entropy_json[:200])  # mostra só os 200 primeiros chars
+
 
         # Valida bits de entropia
         entropy_bits = words if words in VALID_BITS else '128'
@@ -98,7 +102,7 @@ def generate_mnemonic():
         if not os.access(c_executable, os.X_OK):
             return jsonify({'error': f'Executable not executable at {c_executable}'}), 500
 
-        # Garante wordlist correta (corrige bt.txt -> br.txt se necessário)
+        # Garante wordlist correta
         ensure_wordlist_files(csrc_dir, lang_param)
 
         # Log útil
@@ -151,10 +155,6 @@ def generate_mnemonic():
     except Exception as e:
         # Qualquer outro erro Python
         return jsonify({'error': str(e)}), 500
-
-@app.route('/test')
-def test():
-    return "Flask is working!"
 
 if __name__ == '__main__':
     # Porta 5001 para evitar conflito com algo usando 5000

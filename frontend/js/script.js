@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const wordsToggle = document.querySelector('.toggle:nth-child(3) input[type="checkbox"]');
     const generateBtn = document.querySelector('.main-btn');
     const inputBox = document.querySelector('.input-box');
+    const copyBtn = document.querySelector('.copy-btn');
    
     // Generate lang and words values
     const generateValues = () => {
@@ -24,37 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="progress"></div>
             </div>
         `;
-       
-        // Add styles for the container
-        const style = document.createElement('style');
-        style.textContent = `
-            .scratch-container {
-                margin-top: 20px;
-                padding: 15px;
-                background-color: #f5f5f5;
-                border-radius: 8px;
-                text-align: center;
-            }
-            .scratch-instruction {
-                margin-bottom: 10px;
-                font-weight: bold;
-            }
-            .progress-bar {
-                width: 100%;
-                height: 20px;
-                background-color: #e0e0e0;
-                border-radius: 10px;
-                overflow: hidden;
-            }
-            .progress {
-                height: 100%;
-                background-color: #4CAF50;
-                width: 0%;
-                transition: width 0.3s;
-            }
-        `;
-        document.head.appendChild(style);
-       
+     
         // Insert container after the button
         generateBtn.parentNode.insertBefore(scratchContainer, generateBtn.nextSibling);
        
@@ -108,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Convert entropy data to string
             const entropyString = JSON.stringify(entropyData);
            
-            // Call callback with r entropy data
+            // Call callback with the entropy data
             callback(entropyString);
         };
        
@@ -130,25 +101,60 @@ document.addEventListener('DOMContentLoaded', () => {
        
         // Get configuration values
         const config = generateValues();
-        console.log(config)
-        let customEntropy;
-
+        // console.log(config);
+       
         randomScratch((randomNumber) => { 
-            // Aqui você recebe o valor final
-            customEntropy = randomNumber;
-            console.log("Dentro do callback:", customEntropy);
-            // Exemplo: enviar para o backend
-            fetch(`http://localhost:5001/generate?lan=${config.lang}&words=${config.words}&entropy=${encodeURIComponent(customEntropy[0])}`)
-                .then(response => response.json())
+            // Here we receive the final value
+            const customEntropy = randomNumber;
+            // console.log("Inside callback:", customEntropy);
+            
+            // Send to backend
+            fetch(`http://localhost:5001/generate?lan=${config.lang}&words=${config.words}&entropy=${encodeURIComponent(customEntropy)}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(data => {
-                    console.log("Resultado do backend:", data);
+                    // console.log("Backend result:", data);
+                    
+                    // Display mnemonic in the input box
+                    if (data.mnemonic) {
+                        inputBox.textContent = data.mnemonic;
+                    } else {
+                        inputBox.textContent = "Error: " + (data.error || "Unknown error");
+                    }
+                    
+                    // Reset button
                     generateBtn.disabled = false;
-                    generateBtn.textContent = "Generate";
+                    generateBtn.textContent = "Generate mnemonic";
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    inputBox.textContent = "Error generating mnemonic. Please try again.";
+                    generateBtn.disabled = false;
+                    generateBtn.textContent = "Generate mnemonic";
                 });
-
-
-            });
-
+        });
+    });
+    
+    // Add copy functionality
+    copyBtn.addEventListener('click', () => {
+        if (inputBox.textContent) {
+            navigator.clipboard.writeText(inputBox.textContent)
+                .then(() => {
+                    // Show success feedback
+                    const originalIcon = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="bi bi-check-lg"></i>';
+                    
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalIcon;
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
     });
 });
-
