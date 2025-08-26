@@ -161,5 +161,5 @@ def test():
     return "Flask is working!"
 
 if __name__ == '__main__':
-    # Porta 5001 para evitar conflito com algo usando 5000
-    app.run(debug=True, port=5001)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
