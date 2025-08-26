@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
        
         // Get configuration values
         const config = generateValues();
-        // console.log(config);
+        console.log(config);
        
         randomScratch((randomNumber) => { 
             // Here we receive the final value

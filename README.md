@@ -3,6 +3,8 @@
 #### Description:
 
 ## Overview
+*To be used in the future in a crypto wallet
+
 Cat Wallet is a mnemonic phrase (seed phrase) generator based on the BIP39 standard, developed as a final course project. The main goal is to create a secure recovery phrase for cryptocurrency wallets by combining:
 
 - **User-provided entropy** (random mouse movements on the web interface captured by the `randomScratch` function).
