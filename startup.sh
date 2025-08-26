@@ -1,5 +1,6 @@
 #!/bin/bash
-# Comando para iniciar a aplicação com Gunicorn
-gunicorn --bind=0.0.0.0 --workers=4 backend.pysrc.app:app
+# Dar permissão ao executável C
 chmod +x backend/csrc/build/btc-wallet-c
-gunicorn --bind=0.0.0.0:8000 app:app
+
+# Iniciar o Flask via Gunicorn na porta 8000
+gunicorn --bind=0.0.0.0:8000 backend.pysrc.app:app --workers=4
