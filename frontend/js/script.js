@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // console.log("Inside callback:", customEntropy);
             
             // Send to backend
-            fetch(`http://localhost:5001/generate?lan=${config.lang}&words=${config.words}&entropy=${encodeURIComponent(customEntropy)}`)
+            fetch(`http://127.0.0.1:5001/generate?lan=${config.lang}&words=${config.words}&entropy=${encodeURIComponent(randomNumber)}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

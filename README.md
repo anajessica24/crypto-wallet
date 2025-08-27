@@ -5,7 +5,7 @@
 ## Overview
 *To be used in the future in a crypto wallet
 
-Cat Wallet is a mnemonic phrase (seed phrase) generator based on the BIP39 standard, developed as a final course project. The main goal is to create a secure recovery phrase for cryptocurrency wallets by combining:
+Cat Wallet is a mnemonic phrase (seed phrase) generator based on the BIP39 standard. The main goal is to create a secure recovery phrase for cryptocurrency wallets by combining:
 
 - **User-provided entropy** (random mouse movements on the web interface captured by the `randomScratch` function).
 - **System entropy** (randomness from `/dev/urandom` on Unix systems).
@@ -29,7 +29,8 @@ Implements the core logic for BIP39 mnemonic generation.
 - `sha256.h / sha256.c`: implements SHA-256 hashing using OpenSSL.
 - `main.c`: integrates user entropy with system randomness, generates the hash, and converts it into a mnemonic phrase.
 - `wordlist/`: contains BIP39 wordlists in Portuguese (`br.txt`) and English (`en.txt`) with 2048 words each.
-- `Makefile`: automates compilation of the C project and creates the executable `btc-wallet-c`.
+- `Makefile(/csrc)`: automates compilation of the C project and creates the executable `btc-wallet-c`.
+- `Makefile(/crypto-wallet)`: automates compilation of the Python and C.
 
 **C Flow:**
 
@@ -45,14 +46,12 @@ Implements the core logic for BIP39 mnemonic generation.
 
 **Main functions:**
 
-- Serves static files (JS, CSS, images).
 - Receives GET requests at `/generate` with parameters:
   - `lan` → language (`en` or `br`)
   - `words` → entropy size (128 or 256)
   - `entropy` → JSON of mouse movements
 - Calls the C executable (`btc-wallet-c`) with the provided parameters.
 - Returns JSON containing the mnemonic phrase, language, and number of words.
-- Enables CORS for frontend communication.
 
 ---
 
@@ -61,7 +60,7 @@ Developed in **HTML**, **CSS**, and **JavaScript**.
 
 **Main features:**
 
-- Visual interface with cat and white element (`cat.png` and `elementobranco.png`).
+- Visual interface with cat (`cat.png`).
 - Controls to select language and number of words.
 - **Generate mnemonic** button to start the process.
 - Captures user entropy through mouse movements:
@@ -106,7 +105,6 @@ Cat Wallet is a robust, secure, and interactive project applying knowledge of:
 - Good responsive frontend practices
 - Backend/frontend integration via API
 
-The project demonstrates the ability to combine concepts of security, cryptography, and user experience, achieving the goal of creating something useful, educational, and technically challenging.
 
 **Use of AI:**
 

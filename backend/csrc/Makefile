@@ -36,5 +36,5 @@ $(BUILD_DIR):
 all: $(TARGET)
 
 clean:
-	@echo "Limpando arquivos temporários..."
+	@echo "Cleaning up temporary files..."
 	rm -rf $(BUILD_DIR)/*.o

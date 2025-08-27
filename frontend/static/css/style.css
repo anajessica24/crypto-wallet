@@ -29,13 +29,13 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%; 
-    position: relative; /* Adicionado para conter elementos absolutos */
+    position: relative; 
 }
 
 .whitebg {
     position: absolute; 
     top: 328px;
-    width: 95vw; /* Aumentado de 80vw para 95vw */
+    width: 95vw; 
     height: 6.5rem;
     margin: auto;
 }
@@ -65,31 +65,31 @@ body {
     align-items: center;
     width: 95vw; 
     max-width: 1100px;
-    min-height: 50px; /* Altura mínima em vez de altura fixa */
-    padding: 10px; /* Adicione padding para espaço interno */
+    min-height: 50px; 
+    padding: 10px; 
     box-sizing: border-box;
     gap: 10px;
     position: absolute;
     top: 355px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: white; /* Adicione fundo branco para melhor visualização */
+    background-color: white; 
     border-radius: 25px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra para destaque */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
 }
 
 .input-box {
     flex: 1;
-    min-height: 30px; /* Altura mínima em vez de altura fixa */
+    min-height: 30px; 
     background: #e8e8ea;
-    border-radius: 15px; /* Borda arredondada menor que o container */
+    border-radius: 15px; 
     padding: 10px 15px;
     box-sizing: border-box;
     text-align: center;
-    line-height: 1.5; /* Melhor espaçamento entre linhas */
-    word-wrap: break-word; /* Permite quebra de palavras longas */
-    white-space: pre-wrap; /* Mantém quebras de linha e permite quebra automática */
-    overflow-wrap: break-word; /* Garante quebra de palavras muito longas */
+    line-height: 1.5; 
+    word-wrap: break-word; 
+    white-space: pre-wrap;
+    overflow-wrap: break-word; 
 }
 
 .copy-btn {
@@ -99,8 +99,8 @@ body {
     padding: 1rem;
     cursor: pointer;
     flex-shrink: 0;
-    width: 50px; /* Tamanho fixo para consistência */
-    height: 50px; /* Tamanho fixo para consistência */
+    width: 50px; 
+    height: 50px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,7 +113,7 @@ body {
     padding-top: 48vh;
     align-items: center;
     width: 100%;
-    max-width: 600px; /* Limita a largura máxima */
+    max-width: 600px; 
 }
 
 .toggle {
@@ -163,7 +163,7 @@ body {
     cursor: pointer;
     font-weight: bold;
     max-width: 100%;
-    width: 80%; /* Largura responsiva */
+    width: 80%; 
 }
 
 footer {
@@ -207,33 +207,33 @@ footer {
 /* Media Queries para responsividade */
 @media (max-width: 768px) {
     .whitebg, .input-copy {
-        width: 98vw; /* Aumenta a largura em telas menores */
-        max-width: none; /* Remove o limite máximo */
+        width: 98vw; 
+        max-width: none; 
     }
     
     .input-copy {
-        height: 45px; /* Reduz a altura em telas menores */
+        height: 45px; 
     }
     
     .copy-btn {
-        width: 45px; /* Reduz o tamanho do botão */
+        width: 45px; 
         height: 45px;
         padding: 0.8rem;
     }
     
     .content-container {
-        padding-top: 50vh; /* Ajusta o posicionamento */
+        padding-top: 50vh; 
     }
 }
 
 @media (max-width: 480px) {
     .whitebg, .input-copy {
-        width: 99vw; /* Largura quase total em telas muito pequenas */
+        width: 99vw; 
     }
     
     .input-copy {
-        height: 40px; /* Altura ainda menor */
-        padding: 0 5px; /* Reduz o padding */
+        height: 40px; 
+        padding: 0 5px; 
     }
     
     .copy-btn {
@@ -243,6 +243,6 @@ footer {
     }
     
     .content-container {
-        padding-top: 55vh; /* Ajuste adicional para telas pequenas */
+        padding-top: 55vh; 
     }
 }
