@@ -1,4 +1,4 @@
-# Cat Wallet (crypto-wallet)
+# Cat Wallet
 #### Video Demo:  <https://www.youtube.com/watch?v=HCy602CcF1Q>
 #### Description:
 
